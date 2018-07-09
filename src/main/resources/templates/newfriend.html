@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Friend Form</title>
+    <nav th:replace="base :: csslinks"></nav>
+</head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<br/>
+<div class="container">
+    <h1>Add a Friend</h1>
+    <form th:action="@{/friends/process}" th:object="${friend}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <input type="hidden" th:field="*{id}" class="form-control">
+            <label for="friendName">Friend's First Name:</label>
+            <input type="text" th:field="*{firstName}" class="form-control"><br/>
+            <span th:if="${#fields.hasErrors('firstName')}"
+                  th:errors="*{firstName}"></span>
+        </div>
+        <div class="form-group">
+            <label for="description">Friend's Last Name:</label>
+            <input type="text" th:field="*{lastName}" class="form-control"><br/>
+            <span th:if="${#fields.hasErrors('lastName')}"
+                  th:errors="*{lastName}"></span>
+        </div>
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <input type="text" th:field="*{rating}" class="form-control" placeholder="Min = 1, Max = 10">
+                </input><br/>
+            <span th:if="${#fields.hasErrors('rating')}"
+                  th:errors="*{rating}"></span>
+        </div>
+        <div class="form-group">
+            <label for="imageCloudinary">Upload Image of Friend:</label>
+            <input type="file" name="file" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-info btn-lg">Post Friend Details</button>
+    </form>
+    <br /><br />
+</div>
+<nav th:replace="base :: jslinks"></nav>
+</body>
+</html>
