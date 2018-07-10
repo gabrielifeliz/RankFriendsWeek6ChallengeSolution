@@ -38,40 +38,10 @@ public class FriendController {
     @Autowired
     AppUserRepository users;
 
-/*
-    @Autowired
-    private UserService userService;
-
-    @RequestMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping("/register")
-    public String showRegistrationPage(Model model) {
-        model.addAttribute("user", new AppUser());
-        return "registration";
-    }
-
-    @PostMapping("/register")
-    public String processRegistrationPage(
-            @Valid @ModelAttribute("user") AppUser user,
-            BindingResult result, Model model) {
-        model.addAttribute("user", user);
-        if (result.hasErrors()) {
-            return "registration";
-        } else {
-            userService.saveUser(user);
-            model.addAttribute("message", "User Account Successfully Created");
-        }
-        return "login";
-    }
-*/
-
     @RequestMapping("/")
     public String displayHome(Model model, Authentication authentication) {
 
-        model.addAttribute("friends", friends.getMyFriends(authentication));
+        model.addAttribute("friends", friends.rankMyFriends(authentication));
 
         if (authentication.getAuthorities().contains(roles.findByRole("ADMIN")))
             return "redirect:/friends/ranked";

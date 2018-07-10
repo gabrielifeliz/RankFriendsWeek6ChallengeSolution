@@ -21,7 +21,7 @@ public class FriendService {
     FriendRepository friends;
 
     public Iterable<Friend> getMyFriends(Authentication myDetails) {
-        return friends.findAllByMyFriendOrderByRatingDesc(users.findByUsername(myDetails.getName()));
+        return friends.findAllByMyFriend(users.findByUsername(myDetails.getName()));
     }
 
     public Iterable<Friend> rankMyFriends(Authentication myDetails) {
